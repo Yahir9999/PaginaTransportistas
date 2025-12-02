@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap -->
+  <link href="../../node_modules_bootstrap_placeholder_or_cdn" rel="stylesheet">
+
+  <!-- Tu CSS -->
+  <link rel="stylesheet" href="../../CSS/agencia.css">
+
+  <title>Registro Agencia / Cliente</title>
+</head>
+<body>
+
+  <div class="main-wrapper">
+
+    <!-- Logo -->
+    <img src="../../Logos/VENTO.png" class="vento-logo" alt="Vento">
+
+    <!-- Título -->
+    <h2 class="title">REGISTRO AGENCIA / CLIENTE</h2>
+
+    <!-- Card principal -->
+    <div class="card-cedi">
+
+      <!-- Selección -->
+      <div class="option-box">
+        <h5>Seleccione el tipo de entrega</h5>
+
+        <button id="btn-agencia" class="btn-action">Entrega a Agencia (QR)</button>
+        <button id="btn-cliente" class="btn-action btn-secondary">Entrega a Cliente</button>
+      </div>
+
+      <!-- Zona del lector QR (solo para agencia) -->
+      <div id="qr-reader" class="qr-box hidden">
+        <p class="muted"><strong>Entrega a Agencia:</strong><br> Presiona <strong>Iniciar escaneo</strong> para usar la cámara.</p>
+      </div>
+
+      <!-- Controles -->
+      <div class="controls hidden" id="controls-agencia">
+        <button id="btn-start" class="btn-action">Iniciar escaneo</button>
+        <button id="btn-stop" class="btn-action btn-secondary">Detener</button>
+        <button id="btn-salida" class="btn-action btn-exit">Registrar salida (manual)</button>
+      </div>
+
+      <!-- Botón para cliente -->
+      <div class="controls hidden" id="controls-cliente">
+        <button id="btn-registrar-cliente" class="btn-action btn-success">
+          Registrar entrega al cliente
+        </button>
+      </div>
+
+      <!-- Información / Último registro -->
+      <div class="info">
+        <h5>Último registro</h5>
+        <div id="last-record" class="last-record">
+          <p>No hay registros aún.</p>
+        </div>
+      </div>
+
+      <!-- Mensajes al usuario -->
+      <div id="message" class="message" aria-live="polite"></div>
+
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <!-- html5-qrcode -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
+
+  <!-- Firebase config -->
+  <script src="../../js/firebaseConfig.js"></script>
+
+  <!-- Archivo JS específico -->
+  <script src="../../js/registro_agencia_cliente.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,68 @@
+body {
+    background-color: #000;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 30px;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal */
+.main-wrapper {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+/* Logo */
+.vento-logo {
+    width: 65%;
+    margin-bottom: 15px;
+}
+
+/* Título */
+.title {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 25px;
+    font-size: 22px;
+}
+
+/* Cards */
+.card-option {
+    background-color: #d9d9d9;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+/* Título del card */
+.card-option h5 {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Texto */
+.card-option p {
+    margin: 0 0 20px 0;
+    font-size: 15px;
+}
+
+/* Botón IR */
+.btn-ir {
+    display: block;
+    margin: 0 auto;
+    background-color: #6e6e6e;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 8px 30px;
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.btn-ir:hover {
+    background-color: #8a8a8a;
+}

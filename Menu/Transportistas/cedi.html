@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap -->
+  <link href="../../node_modules_bootstrap_placeholder_or_cdn" rel="stylesheet">
+  <!-- Tu CSS (ajusta si tu carpeta CSS está en otra ruta) -->
+  <link rel="stylesheet" href="../../CSS/cedi.css">
+
+  <title>Registro CEDI</title>
+</head>
+<body>
+
+  <div class="main-wrapper">
+
+    <!-- Logo -->
+    <img src="../../Logos/VENTO.png" class="vento-logo" alt="Vento">
+
+    <!-- Título -->
+    <h2 class="title">REGISTRO CEDI</h2>
+
+    <!-- Card principal -->
+    <div class="card-cedi">
+
+      <!-- Zona del lector QR -->
+      <div id="qr-reader" class="qr-box">
+        <!-- html5-qrcode inyecta el video/preview aquí -->
+        <p class="muted">Presiona <strong>Iniciar escaneo</strong> para usar la cámara.</p>
+      </div>
+
+      <!-- Controles -->
+      <div class="controls">
+        <button id="btn-start" class="btn-action">Iniciar escaneo</button>
+        <button id="btn-stop" class="btn-action btn-secondary">Detener</button>
+        <button id="btn-manual-exit" class="btn-action btn-exit">Registrar salida (manual)</button>
+      </div>
+
+      <!-- Información / Último registro -->
+      <div class="info">
+        <h5>Último registro</h5>
+        <div id="last-record" class="last-record">
+          <p>No hay registros aún.</p>
+        </div>
+      </div>
+
+      <!-- Mensajes al usuario -->
+      <div id="message" class="message" aria-live="polite"></div>
+
+    </div>
+  </div>
+
+  <!-- Firebase (compat para uso sencillo) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <!-- html5-qrcode (CDN) -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
+
+  <!-- Tu config de Firebase: crea este archivo en ../../js/firebaseConfig.js -->
+  <script src="../../js/firebaseConfig.js"></script>
+
+  <!-- Lógica del registro CEDI -->
+  <script src="../../js/registro_cedi.js"></script>
+
+</body>
+</html>

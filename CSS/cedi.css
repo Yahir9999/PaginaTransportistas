@@ -1,0 +1,102 @@
+/* cedi.css - estilo matching Vento */
+body {
+    background-color: #000;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+    color: #fff;
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.vento-logo {
+    width: 60%;
+    margin: 8px auto 16px auto;
+    display: block;
+}
+
+.title {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+
+/* Card */
+.card-cedi {
+    background-color: #dcdcdc;
+    color: #000;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: left;
+}
+
+/* QR box */
+.qr-box {
+    height: 260px;
+    background: #1f1f1f;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ddd;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+/* controls */
+.controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.btn-action {
+    background-color: #6e6e6e;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-action:hover { opacity: .9; }
+
+.btn-secondary {
+    background-color: #4a4a4a;
+}
+
+.btn-exit {
+    background-color: #9a3a3a;
+}
+
+/* info */
+.info {
+    margin-top: 6px;
+}
+
+.last-record {
+    background: rgba(0,0,0,0.05);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 8px;
+    color: #111;
+    min-height: 48px;
+}
+
+/* mensajes */
+.message {
+    margin-top: 12px;
+    min-height: 24px;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+}

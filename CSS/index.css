@@ -1,0 +1,43 @@
+/* Fondo general */
+body {
+    background-color: #000; 
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal */
+.main-container {
+    width: 90%;
+    max-width: 400px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    background-color: #000;
+}
+
+/* Logo Vento */
+.vento-logo {
+    width: 70%;
+    margin-bottom: 40px;
+}
+
+/* Botones */
+.btn-vento {
+    background-color: #a19e9e;
+    color: #ffffff;
+    font-weight: bold;
+    width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 12px auto;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.btn-vento:hover {
+    background-color: #d4cdcd;
+    color: #000;
+}

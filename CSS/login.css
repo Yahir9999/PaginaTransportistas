@@ -1,0 +1,83 @@
+/* Fondo */
+body {
+    background-color: #000;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor principal */
+.login-container {
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+
+/* Logo Vento */
+.vento-logo {
+    width: 70%;
+    margin-bottom: 35px;
+}
+
+/* Tarjeta */
+.login-card {
+    background-color: #1e1e1e;
+    padding: 40px 25px;
+    border-radius: 20px;
+    position: relative;
+}
+
+/* Icono usuario grande */
+.user-icon {
+    width: 70px;
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Grupo de input */
+.input-group-custom {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 8px;
+}
+
+/* Iconos */
+.input-icon {
+    width: 24px;
+    margin-right: 12px;
+    filter: invert(1);
+}
+
+/* Inputs */
+.input-group-custom input {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    width: 100%;
+    font-size: 15px;
+}
+
+/* Botón */
+.btn-login {
+    width: 70%;
+    background-color: #a19e9e;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 25px;
+    transition: .3s;
+}
+
+.btn-login:hover {
+    background-color: #d4cdcd;
+    color: #000;
+}
