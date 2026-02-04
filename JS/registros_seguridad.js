@@ -14,51 +14,44 @@ document.addEventListener("DOMContentLoaded", () => {
     // =======================================================
  html5QrCode = new Html5Qrcode("qr-reader");
 
-Html5Qrcode.getCameras().then(cameras => {
-    if (!cameras || cameras.length === 0) return;
+html5QrCode = new Html5Qrcode("qr-reader");
 
-    // Buscar cámara trasera
-    const camaraTrasera = cameras.find(cam =>
-        cam.label.toLowerCase().includes("back") ||
-        cam.label.toLowerCase().includes("rear")
-    );
+html5QrCode.start(
+    { facingMode: "environment" }, // 👈 fuerza cámara trasera
+    { fps: 10, qrbox: 250 },
+    qr => {
 
-    // Usar trasera o fallback
-    const cameraId = camaraTrasera ? camaraTrasera.id : cameras[0].id;
+        document.getElementById("beepSound").play();
 
-    html5QrCode.start(
-        cameraId,
-        { fps: 10, qrbox: 250 },
-        qr => {
+        try {
+            const data = JSON.parse(qr);
 
-            document.getElementById("beepSound").play();
+            document.getElementById("id_transportista").value = data.id_transportista || "";
+            document.getElementById("nombre").value = data.nombre || "";
+            document.getElementById("linea").value = data.linea_transporte || "";
+            document.getElementById("placas").value = data.placas || "";
+            document.getElementById("unidad").value = data.unidad || "";
 
-            try {
-                const data = JSON.parse(qr);
+            datosTransportista = {
+                id_transportista: data.id_transportista,
+                nombre: data.nombre,
+                linea_transporte: data.linea_transporte,
+                placas: data.placas,
+                unidad: data.unidad
+            };
 
-                document.getElementById("id_transportista").value = data.id_transportista || "";
-                document.getElementById("nombre").value = data.nombre || "";
-                document.getElementById("linea").value = data.linea_transporte || "";
-                document.getElementById("placas").value = data.placas || "";
-                document.getElementById("unidad").value = data.unidad || "";
+            toRegistradas = false;
+            document.getElementById("btnRegistrarTO").disabled = false;
 
-                datosTransportista = {
-                    id_transportista: data.id_transportista,
-                    nombre: data.nombre,
-                    linea_transporte: data.linea_transporte,
-                    placas: data.placas,
-                    unidad: data.unidad
-                };
+            // Opcional: detener lector tras lectura exitosa
+            // html5QrCode.stop();
 
-                toRegistradas = false;
-                document.getElementById("btnRegistrarTO").disabled = false;
-
-            } catch (e) {
-                alert("QR inválido");
-            }
+        } catch (e) {
+            alert("QR inválido");
         }
-    );
-});
+    }
+);
+
 
     // =======================================================
     // REGISTRAR LLEGADA
