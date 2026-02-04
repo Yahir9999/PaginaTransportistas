@@ -61,33 +61,43 @@ document.addEventListener("DOMContentLoaded", () => {
     // ============================
     // QR
     // ============================
-    const qr = new Html5Qrcode("qr-reader");
+const qr = new Html5Qrcode("qr-reader");
 
-    Html5Qrcode.getCameras().then(cameras => {
-        if (!cameras.length) return;
+Html5Qrcode.getCameras().then(cameras => {
+    if (!cameras || cameras.length === 0) return;
 
-        qr.start(
-            cameras[0].id,
-            { fps: 10, qrbox: 250 },
-            text => {
-                if (modoEntrega !== "AGENCIA") return;
+    // Buscar cámara trasera
+    let camaraTrasera = cameras.find(cam =>
+        cam.label.toLowerCase().includes("back") ||
+        cam.label.toLowerCase().includes("rear")
+    );
 
-                try { beep.play(); } catch {}
+    // Si no encuentra trasera, usa la primera disponible
+    let cameraId = camaraTrasera ? camaraTrasera.id : cameras[0].id;
 
-                let data;
-                try {
-                    data = JSON.parse(text);
-                } catch {
-                    return mostrarAlerta("QR inválido", "danger");
-                }
+    qr.start(
+        cameraId,
+        { fps: 10, qrbox: 250 },
+        text => {
+            if (modoEntrega !== "AGENCIA") return;
 
-                inputNombreAgencia.value = data.agencia || "";
-                inputNombreCedi.value = data.cedi || "";
+            try { beep.play(); } catch {}
 
-                mostrarAlerta("QR leído correctamente", "success");
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch {
+                return mostrarAlerta("QR inválido", "danger");
             }
-        );
-    });
+
+            inputNombreAgencia.value = data.agencia || "";
+            inputNombreCedi.value = data.cedi || "";
+
+            mostrarAlerta("QR leído correctamente", "success");
+        }
+    );
+});
+
 
     // ============================
     // INCIDENCIA

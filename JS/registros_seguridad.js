@@ -12,44 +12,53 @@ document.addEventListener("DOMContentLoaded", () => {
     // =======================================================
     // LECTOR QR → LLEGADA
     // =======================================================
-    html5QrCode = new Html5Qrcode("qr-reader");
+ html5QrCode = new Html5Qrcode("qr-reader");
 
-    Html5Qrcode.getCameras().then(cameras => {
-        if (cameras.length > 0) {
-            html5QrCode.start(
-                cameras[0].id,
-                { fps: 10, qrbox: 250 },
-                qr => {
+Html5Qrcode.getCameras().then(cameras => {
+    if (!cameras || cameras.length === 0) return;
 
-                    document.getElementById("beepSound").play();
+    // Buscar cámara trasera
+    const camaraTrasera = cameras.find(cam =>
+        cam.label.toLowerCase().includes("back") ||
+        cam.label.toLowerCase().includes("rear")
+    );
 
-                    try {
-                        const data = JSON.parse(qr);
+    // Usar trasera o fallback
+    const cameraId = camaraTrasera ? camaraTrasera.id : cameras[0].id;
 
-                        document.getElementById("id_transportista").value = data.id_transportista || "";
-                        document.getElementById("nombre").value = data.nombre || "";
-                        document.getElementById("linea").value = data.linea_transporte || "";
-                        document.getElementById("placas").value = data.placas || "";
-                        document.getElementById("unidad").value = data.unidad || "";
+    html5QrCode.start(
+        cameraId,
+        { fps: 10, qrbox: 250 },
+        qr => {
 
-                        datosTransportista = {
-                            id_transportista: data.id_transportista,
-                            nombre: data.nombre,
-                            linea_transporte: data.linea_transporte,
-                            placas: data.placas,
-                            unidad: data.unidad
-                        };
+            document.getElementById("beepSound").play();
 
-                        toRegistradas = false;
-                        document.getElementById("btnRegistrarTO").disabled = false;
+            try {
+                const data = JSON.parse(qr);
 
-                    } catch (e) {
-                        alert("QR inválido");
-                    }
-                }
-            );
+                document.getElementById("id_transportista").value = data.id_transportista || "";
+                document.getElementById("nombre").value = data.nombre || "";
+                document.getElementById("linea").value = data.linea_transporte || "";
+                document.getElementById("placas").value = data.placas || "";
+                document.getElementById("unidad").value = data.unidad || "";
+
+                datosTransportista = {
+                    id_transportista: data.id_transportista,
+                    nombre: data.nombre,
+                    linea_transporte: data.linea_transporte,
+                    placas: data.placas,
+                    unidad: data.unidad
+                };
+
+                toRegistradas = false;
+                document.getElementById("btnRegistrarTO").disabled = false;
+
+            } catch (e) {
+                alert("QR inválido");
+            }
         }
-    });
+    );
+});
 
     // =======================================================
     // REGISTRAR LLEGADA
@@ -160,35 +169,45 @@ alert("Llegada registrada correctamente.");
 
         qrSalida = new Html5Qrcode("qr-reader-salida");
 
-        Html5Qrcode.getCameras().then(cameras => {
-            if (cameras.length > 0) {
-                qrSalida.start(
-                    cameras[0].id,
-                    { fps: 10, qrbox: 250 },
-                    qr => {
+ Html5Qrcode.getCameras().then(cameras => {
+    if (!cameras || cameras.length === 0) return;
 
-                        document.getElementById("beepSound").play();
+    // Buscar cámara trasera
+    const camaraTrasera = cameras.find(cam =>
+        cam.label.toLowerCase().includes("back") ||
+        cam.label.toLowerCase().includes("rear")
+    );
 
-                        try {
-                            const dataSalida = JSON.parse(qr);
+    // Fallback si no se detecta por nombre
+    const cameraId = camaraTrasera ? camaraTrasera.id : cameras[0].id;
 
-                            if (dataSalida.id_transportista !== datosTransportista.id_transportista) {
-                                alert("⚠ QR incorrecto.");
-                                return;
-                            }
+    qrSalida.start(
+        cameraId,
+        { fps: 10, qrbox: 250 },
+        qr => {
 
-                            salidaConfirmada = true;
-                            document.getElementById("btnConfirmarSalida").disabled = false;
+            document.getElementById("beepSound").play();
 
-                            alert("QR validado. Confirme salida.");
+            try {
+                const dataSalida = JSON.parse(qr);
 
-                        } catch (e) {
-                            alert("QR inválido");
-                        }
-                    }
-                );
+                if (dataSalida.id_transportista !== datosTransportista.id_transportista) {
+                    alert("⚠ QR incorrecto.");
+                    return;
+                }
+
+                salidaConfirmada = true;
+                document.getElementById("btnConfirmarSalida").disabled = false;
+
+                alert("QR validado. Confirme salida.");
+
+            } catch (e) {
+                alert("QR inválido");
             }
-        });
+        }
+    );
+});
+
     }
 
     // =======================================================
