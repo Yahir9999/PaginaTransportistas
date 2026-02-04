@@ -12,12 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // =======================================================
     // LECTOR QR → LLEGADA
     // =======================================================
- html5QrCode = new Html5Qrcode("qr-reader");
-
 html5QrCode = new Html5Qrcode("qr-reader");
 
 html5QrCode.start(
-    { facingMode: "environment" }, // 👈 fuerza cámara trasera
+    { facingMode: "environment" },
     { fps: 10, qrbox: 250 },
     qr => {
 
@@ -43,10 +41,7 @@ html5QrCode.start(
             toRegistradas = false;
             document.getElementById("btnRegistrarTO").disabled = false;
 
-            // Opcional: detener lector tras lectura exitosa
-            // html5QrCode.stop();
-
-        } catch (e) {
+        } catch {
             alert("QR inválido");
         }
     }
@@ -165,7 +160,7 @@ function iniciarQrSalida() {
     qrSalida.start(
         { facingMode: "environment" },
         { fps: 10, qrbox: 250 },
-        qr => {
+        async qr => {
 
             document.getElementById("beepSound").play();
 
@@ -173,28 +168,30 @@ function iniciarQrSalida() {
                 const dataSalida = JSON.parse(qr);
 
                 if (dataSalida.id_transportista !== datosTransportista.id_transportista) {
-                    qrSalida.stop(); // 👈 DETENER
                     alert("⚠ QR incorrecto.");
                     return;
                 }
 
-                // 👇 DETENER LECTOR ANTES DEL ALERT
-                qrSalida.stop().then(() => {
+                salidaConfirmada = true;
+                document.getElementById("btnConfirmarSalida").disabled = false;
 
-                    salidaConfirmada = true;
-                    document.getElementById("btnConfirmarSalida").disabled = false;
+                // DETENER Y LIMPIAR COMPLETAMENTE
+                await qrSalida.stop();
+                await qrSalida.clear();
+                qrSalida = null;
 
-                    alert("QR validado. Confirme salida.");
-
-                });
+                alert("QR validado. Confirme salida.");
 
             } catch (e) {
-                qrSalida.stop();
+                await qrSalida.stop();
+                await qrSalida.clear();
+                qrSalida = null;
                 alert("QR inválido");
             }
         }
     );
 }
+
 
 
     // =======================================================
@@ -207,12 +204,12 @@ document.getElementById("btnConfirmarSalida").addEventListener("click", async ()
         return;
     }
 
-    // Deshabilitar botón para evitar doble clic
+
     const btn = document.getElementById("btnConfirmarSalida");
     btn.disabled = true;
 
     try {
-        const response = await fetch(URL_BACKEND, {
+        await fetch(URL_BACKEND, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -221,22 +218,19 @@ document.getElementById("btnConfirmarSalida").addEventListener("click", async ()
             })
         });
 
-        if (!response.ok) {
-            throw new Error("Error al registrar salida");
-        }
 
-        // 👇 AQUÍ ya terminó todo correctamente
+
         alert("Salida del CEDI registrada correctamente.");
 
         limpiarPantalla();
 
-    } catch (error) {
-
-        alert("Error al registrar la salida. Intente nuevamente.");
+    } catch {
+        alert("Error al registrar la salida.");
         btn.disabled = false;
 
     }
 });
+
 
 
 });
@@ -265,7 +259,12 @@ function limpiarPantalla() {
     salidaConfirmada = false;
 
     if (html5QrCode) html5QrCode.stop().catch(() => {});
-    if (qrSalida) qrSalida.stop().catch(() => {});
+    if (qrSalida) {
+    qrSalida.stop().catch(() => {});
+    qrSalida.clear().catch(() => {});
+    qrSalida = null;
+}
+
 
     mostrarMensajeListo();
     toRegistradas = false;
