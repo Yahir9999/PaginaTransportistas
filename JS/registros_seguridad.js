@@ -162,44 +162,35 @@ alert("Llegada registrada correctamente.");
 
         qrSalida = new Html5Qrcode("qr-reader-salida");
 
- Html5Qrcode.getCameras().then(cameras => {
-    if (!cameras || cameras.length === 0) return;
+qrSalida.start(
+    { facingMode: "environment" }, // 👈 fuerza cámara trasera
+    { fps: 10, qrbox: 250 },
+    qr => {
 
-    // Buscar cámara trasera
-    const camaraTrasera = cameras.find(cam =>
-        cam.label.toLowerCase().includes("back") ||
-        cam.label.toLowerCase().includes("rear")
-    );
+        document.getElementById("beepSound").play();
 
-    // Fallback si no se detecta por nombre
-    const cameraId = camaraTrasera ? camaraTrasera.id : cameras[0].id;
+        try {
+            const dataSalida = JSON.parse(qr);
 
-    qrSalida.start(
-        cameraId,
-        { fps: 10, qrbox: 250 },
-        qr => {
-
-            document.getElementById("beepSound").play();
-
-            try {
-                const dataSalida = JSON.parse(qr);
-
-                if (dataSalida.id_transportista !== datosTransportista.id_transportista) {
-                    alert("⚠ QR incorrecto.");
-                    return;
-                }
-
-                salidaConfirmada = true;
-                document.getElementById("btnConfirmarSalida").disabled = false;
-
-                alert("QR validado. Confirme salida.");
-
-            } catch (e) {
-                alert("QR inválido");
+            if (dataSalida.id_transportista !== datosTransportista.id_transportista) {
+                alert("⚠ QR incorrecto.");
+                return;
             }
+
+            salidaConfirmada = true;
+            document.getElementById("btnConfirmarSalida").disabled = false;
+
+            alert("QR validado. Confirme salida.");
+
+            // Opcional: detener lector para evitar múltiples lecturas
+            // qrSalida.stop();
+
+        } catch (e) {
+            alert("QR inválido");
         }
-    );
-});
+    }
+);
+
 
     }
 

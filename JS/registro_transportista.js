@@ -63,40 +63,31 @@ document.addEventListener("DOMContentLoaded", () => {
     // ============================
 const qr = new Html5Qrcode("qr-reader");
 
-Html5Qrcode.getCameras().then(cameras => {
-    if (!cameras || cameras.length === 0) return;
+qr.start(
+    { facingMode: "environment" }, // 👈 fuerza cámara trasera
+    { fps: 10, qrbox: 250 },
+    text => {
+        if (modoEntrega !== "AGENCIA") return;
 
-    // Buscar cámara trasera
-    let camaraTrasera = cameras.find(cam =>
-        cam.label.toLowerCase().includes("back") ||
-        cam.label.toLowerCase().includes("rear")
-    );
+        try { beep.play(); } catch {}
 
-    // Si no encuentra trasera, usa la primera disponible
-    let cameraId = camaraTrasera ? camaraTrasera.id : cameras[0].id;
-
-    qr.start(
-        cameraId,
-        { fps: 10, qrbox: 250 },
-        text => {
-            if (modoEntrega !== "AGENCIA") return;
-
-            try { beep.play(); } catch {}
-
-            let data;
-            try {
-                data = JSON.parse(text);
-            } catch {
-                return mostrarAlerta("QR inválido", "danger");
-            }
-
-            inputNombreAgencia.value = data.agencia || "";
-            inputNombreCedi.value = data.cedi || "";
-
-            mostrarAlerta("QR leído correctamente", "success");
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch {
+            return mostrarAlerta("QR inválido", "danger");
         }
-    );
-});
+
+        inputNombreAgencia.value = data.agencia || "";
+        inputNombreCedi.value = data.cedi || "";
+
+        mostrarAlerta("QR leído correctamente", "success");
+
+        // Opcional: detener lector para evitar lecturas repetidas
+        // qr.stop();
+    }
+);
+
 
 
     // ============================
