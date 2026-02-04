@@ -153,46 +153,49 @@ alert("Llegada registrada correctamente.");
     
 });
 
-    // =======================================================
-    // INICIAR QR SALIDA
-    // =======================================================
-    function iniciarQrSalida() {
+// =======================================================
+// INICIAR QR SALIDA
+// =======================================================
+function iniciarQrSalida() {
 
-        if (qrSalida) return;
+    if (qrSalida) return;
 
-        qrSalida = new Html5Qrcode("qr-reader-salida");
+    qrSalida = new Html5Qrcode("qr-reader-salida");
 
-qrSalida.start(
-    { facingMode: "environment" }, // 👈 fuerza cámara trasera
-    { fps: 10, qrbox: 250 },
-    qr => {
+    qrSalida.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: 250 },
+        qr => {
 
-        document.getElementById("beepSound").play();
+            document.getElementById("beepSound").play();
 
-        try {
-            const dataSalida = JSON.parse(qr);
+            try {
+                const dataSalida = JSON.parse(qr);
 
-            if (dataSalida.id_transportista !== datosTransportista.id_transportista) {
-                alert("⚠ QR incorrecto.");
-                return;
+                if (dataSalida.id_transportista !== datosTransportista.id_transportista) {
+                    qrSalida.stop(); // 👈 DETENER
+                    alert("⚠ QR incorrecto.");
+                    return;
+                }
+
+                // 👇 DETENER LECTOR ANTES DEL ALERT
+                qrSalida.stop().then(() => {
+
+                    salidaConfirmada = true;
+                    document.getElementById("btnConfirmarSalida").disabled = false;
+
+                    alert("QR validado. Confirme salida.");
+
+                });
+
+            } catch (e) {
+                qrSalida.stop();
+                alert("QR inválido");
             }
-
-            salidaConfirmada = true;
-            document.getElementById("btnConfirmarSalida").disabled = false;
-
-            alert("QR validado. Confirme salida.");
-
-            // Opcional: detener lector para evitar múltiples lecturas
-            // qrSalida.stop();
-
-        } catch (e) {
-            alert("QR inválido");
         }
-    }
-);
+    );
+}
 
-
-    }
 
     // =======================================================
     // CONFIRMAR SALIDA FINAL
