@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Transportista — Registro Agencia</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS local -->
+    <link rel="stylesheet" href="../CSS/registro_transportista.css">
+
+    <!-- html5-qrcode -->
+    <script src="https://unpkg.com/html5-qrcode" defer></script>
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-3">Registro Agencia / Cliente</h2>
+
+    <!-- TARJETA: Registro principal -->
+    <div class="card mb-4">
+        <h3>Formulario</h3>
+        <p>Ingresa tu ID, escanea el QR de la agencia y registra la TO que entregas.</p>
+
+        <!-- ID transportista -->
+        <label class="form-label mt-2">ID Transportista</label>
+        <input type="text" id="inputIdTransportista" class="form-control" placeholder="Escribe tu ID">
+
+        <!-- Selector entrega a cliente o agencia -->
+        <label class="form-label mt-3">Tipo de entrega</label>
+        <div class="d-flex gap-2 mb-3">
+            <button id="btnEntregaAgencia" class="btn active">Entrega Agencia</button>
+            <button id="btnEntregaCliente" class="btn">Entrega Cliente</button>
+        </div>
+
+        <!-- Si se elige cliente, aparece este recuadro -->
+        <div id="bloqueCliente" style="display:none;">
+            <label class="form-label">Nombre del cliente</label>
+            <input type="text" id="inputNombreCliente" class="form-control" placeholder="Nombre y apellido">
+        </div>
+
+
+
+        <!-- Lector QR -->
+        <div class="mt-3">
+            <label class="form-label">Escanear QR de la Agencia</label>
+            <div id="qr-reader" style="width:100%;"></div>
+            <div class="mt-2">
+                <input type="text" id="inputNombreAgencia" class="form-control" placeholder="Nombre de la agencia (se llenará al escanear)" readonly>
+                <input type="text" id="inputNombreCedi" class="form-control" placeholder="Nombre del CEDI(se llenará al escanear)" readonly>
+            </div>
+        </div>
+
+        <!-- TO -->
+        <div class="mt-3">
+            <label class="form-label">TO(s) entregadas</label>
+
+            <div id="contenedorTOs">
+                <input type="text" class="form-control mb-2 to-input" placeholder="Ingresa una TO">
+            </div>
+
+            <button id="btnAgregarTO" class="btn w-100 mt-2">Agregar otra TO</button>
+        </div>
+
+
+        <!-- Hora entrega (solo lectura) -->
+        <label class="form-label mt-3">Hora de entrega</label>
+        <input type="text" id="inputHoraEntrega" class="form-control" readonly placeholder="Se registrará al guardar">
+
+        <!-- Incidencia -->
+        <div class="mt-3">
+            <label class="form-label">¿Hubo incidencia?</label>
+            <div class="d-flex gap-2">
+                <button id="btnIncidenciaSi" class="btn">Sí</button>
+                <button id="btnIncidenciaNo" class="btn">No</button>
+            </div>
+        </div>
+
+        <!-- Bloque que aparece si hubo incidencia -->
+        <div id="bloqueIncidencia" style="display:none;" class="mt-3">
+            <label class="form-label">Fotos de incidencia (mín. 1)</label>
+            <input type="file" id="inputFotosIncidencia" accept="image/*" multiple class="form-control">
+
+            <label class="form-label mt-2">Notas (obligatorio)</label>
+            <textarea id="inputNotasIncidencia" class="form-control" rows="3" placeholder="Describe la incidencia"></textarea>
+
+            <div id="previewIncidencia" class="mt-2 d-flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Botón Guardar -->
+        <button id="btnGuardarEntrega" class="btn w-100 mt-3">Guardar</button>
+    </div>
+
+    <!-- Mensajes -->
+    <div id="alertPlaceholder"></div>
+
+</div>
+
+<!-- Sonido al escanear -->
+<audio id="beepSound" src="../Audio/beep.mp3" preload="auto"></audio>
+
+<!-- JS -->
+<script src="../JS/registro_transportista.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+/* Basado en tu estilo base */
+body {
+    background-color: #000000;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+.container {
+    max-width: 430px;
+    background-color: #000;
+    padding-bottom: 40px;
+}
+
+h2 {
+    font-weight: 700;
+    color: white;
+}
+
+.card {
+    background-color: #e5e5e5;
+    border-radius: 20px;
+    padding: 22px;
+    border: none;
+    text-align: left;
+}
+
+.card h3 {
+    color: black;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #2b2b2b;
+    font-size: 15px;
+}
+
+.card button {
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 35px;
+    font-size: 14px;
+}
+
+.card button:hover {
+    background-color: #444;
+}
+
+/* Botones Sí/No estilo */
+#btnIncidenciaSi.active, #btnIncidenciaNo.active {
+    background-color: #1a1f4c;
+    color: white;
+}
+
+#qr-reader {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+}
+
+/* Preview imágenes */
+#previewIncidencia img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+}

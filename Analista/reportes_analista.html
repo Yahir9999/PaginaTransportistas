@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Analista — Ver evidencias</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS local -->
+  <link rel="stylesheet" href="../CSS/reportes_analista.css">
+</head>
+<body>
+  <div class="container mt-4">
+
+    <h2 class="text-center mb-3">Ver evidencias</h2>
+
+    <!-- CONTROLES SUPERIORES -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row g-2 align-items-center">
+          <div class="col-12 col-md-4">
+            <input id="inputAnalista" class="form-control" placeholder="Nombre del analista (para registros)" />
+          </div>
+
+          <div class="col-12 col-md-4">
+            <input id="searchBox" class="form-control" placeholder="Buscar por ID, TO, agencia..." />
+          </div>
+
+          <div class="col-6 col-md-2">
+            <select id="selectPageSize" class="form-control">
+              <option value="10">10 filas</option>
+              <option value="25">25 filas</option>
+              <option value="50">50 filas</option>
+            </select>
+          </div>
+
+          <div class="col-6 col-md-2 text-end">
+            <button id="btnRefresh" class="btn">Actualizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="card mb-4">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table id="evidenciasTable" class="table table-borderless mb-0">
+            <thead>
+              <tr>
+                <th>ID Registro</th>
+                <th>ID Transportista</th>
+                <th>TO(s)</th>
+                <th>Agencia/Cliente</th>
+                <th>Hora entrega/evidencia</th>
+                <th>Notas</th>
+                <th>Fotos</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- llenado por JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGINACIÓN -->
+    <div class="d-flex justify-content-between align-items-center mb-5">
+      <div id="paginationInfo" class="text-muted"></div>
+      <nav>
+        <ul id="pagination" class="pagination mb-0"></ul>
+      </nav>
+    </div>
+
+    <div id="alertPlaceholder"></div>
+  </div>
+
+  <!-- MODAL: Preview imagen + descargar -->
+  <div class="modal fade" id="modalPreview" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <img id="modalImage" src="" alt="Preview" class="img-fluid rounded" />
+          <div class="mt-3 d-flex justify-content-between">
+            <div id="modalMeta" class="text-start"></div>
+            <div>
+              <a id="btnDownloadSingle" class="btn">Descargar imagen</a>
+              <a id="btnDownloadZipFromModal" class="btn">Descargar ZIP (toda evidencia)</a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../JS/reportes_analista.js"></script>
+</body>
+</html>

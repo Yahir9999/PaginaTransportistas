@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analista - Inicio de Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/login_seguridad.css">
+</head>
+<body>
+
+<div class="login-container">
+
+    <img src="../Logos/VENTO.png" class="vento-logo" alt="Vento">
+
+    <h2 class="titulo-rol">ANALISTA</h2>
+
+    <div class="card login-card">
+
+        <img src="../iconos/usuario.png" class="icon-user" alt="usuario">
+
+        <div class="form-group input-box">
+            <img src="../iconos/correo.png" class="input-icon">
+            <input type="email" class="form-control login-input" placeholder="correo electrónico">
+        </div>
+
+        <div class="form-group input-box">
+            <img src="../iconos/contraseña.png" class="input-icon">
+            <input type="password" class="form-control login-input" placeholder="contraseña">
+        </div>
+
+        <button class="btn login-btn">inicia sesión</button>
+
+    </div>
+
+</div>
+
+<!--script para validar correo y contraseña-->
+<script>
+const URL_LOGIN = "https://script.google.com/macros/s/AKfycbwzUt_BBfDsUwFTFVf_5-TrdrzzLBqVvZNXzK8-n1np1yvQZZqmTwblCnrbWdKlLpio0Q/exec";
+
+document.querySelector(".login-btn").addEventListener("click", async () => {
+
+    const correo = document.querySelector('input[type="email"]').value.trim();
+    const password = document.querySelector('input[type="password"]').value.trim();
+
+    if (!correo || !password) {
+        alert("Ingrese correo y contraseña");
+        return;
+    }
+
+    try {
+        await fetch(URL_LOGIN, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify({
+                correo: correo,
+                password: password,
+                rol: "ANALISTA"
+            })
+        });
+
+        localStorage.setItem("sesion", JSON.stringify({
+        logueado: true,
+        rol: "ANALISTA",
+        correo: correo
+        }));
+
+        // ✅ Si llega aquí → Apps Script SÍ recibió la petición
+        window.location.href = "../Analista/inicio_analista.html";
+
+    } catch (error) {
+        console.error(error);
+        alert("Error de conexión");
+    }
+});
+</script>
+
+
+</body>
+</html>

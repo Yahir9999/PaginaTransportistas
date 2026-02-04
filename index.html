@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportistas Vento</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-  <!-- Tu CSS externo -->
-  <link rel="stylesheet" href="css/index.css">
-
-  <title>Vento</title>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="CSS/index.css">
 </head>
+
 <body>
 
-  <div class="main-container">
+    <div class="main-container d-flex flex-column justify-content-start align-items-center">
 
-    <!-- Logo -->
-    <img src="Logos/VENTO.png" class="vento-logo" alt="Vento">
+        <!-- Logo -->
+        <img src="Logos/VENTO.png" alt="Vento" class="vento-logo">
 
-    <!-- Botón Transportista -->
-    <button class="btn-vento" onclick="selectRole('transportista')">
-      TRANSPORTISTA
-    </button>
+        <!-- Botón Seguridad -->
+        <div class="role-container">
+            <i class="bi bi-shield-lock icon-role"></i>
+            <a href="Seguridad/login_seguridad.html" class="role-btn">SEGURIDAD</a>
+        </div>
 
-    <!-- Botón Analista -->
-    <button class="btn-vento" onclick="selectRole('analista')">
-      ANALISTA
-    </button>
+        <!-- Botón Transportista -->
+        <div class="role-container">
+            <i class="bi bi-truck icon-role"></i>
+            <a href="Transportista/login_transportista.html" class="role-btn">TRANSPORTISTA</a>
+        </div>
 
-  </div>
+        <!-- Botón Analista -->
+        <div class="role-container">
+            <i class="bi bi-bar-chart icon-role"></i>
+            <a href="Analista/login_analista.html" class="role-btn">ANALISTA</a>
+        </div>
 
-  <script>
-    function selectRole(role) {
-      localStorage.setItem("roleSelected", role);
-      window.location.href = "login.html";
-    }
-  </script>
+    </div>
 
 </body>
 </html>

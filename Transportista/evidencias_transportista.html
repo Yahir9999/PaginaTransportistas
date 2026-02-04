@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrega de Evidencias</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/evidencias_transportista.css">
+</head>
+
+<body>
+<div class="container mt-4">
+
+  <h2 class="text-center mb-3">Entrega de Evidencias</h2>
+
+  <div class="card p-3">
+
+    <!-- ID -->
+    <label class="form-label">ID Transportista</label>
+    <input id="inputIdTransportista" class="form-control">
+
+    <!-- TOs -->
+    <label class="form-label mt-3">TO(s)</label>
+    <div id="contenedorTOs">
+      <input class="form-control mb-2 to-input" placeholder="Ingresa una TO">
+    </div>
+
+    <button id="btnAgregarTO" class="btn btn-sm btn-secondary mt-1">
+      Agregar TO
+    </button>
+
+    <!-- Fotos -->
+    <label class="form-label mt-3">
+      Fotos de evidencia (máx. 3)
+    </label>
+    <input
+      type="file"
+      id="inputFotosEvidencia"
+      class="form-control"
+      accept="image/*"
+      multiple
+    >
+
+    <div
+      id="previewEvidencias"
+      class="mt-2 d-flex flex-wrap gap-2"
+    ></div>
+
+    <!-- Notas -->
+    <label class="form-label mt-3">Notas</label>
+    <textarea
+      id="inputNotas"
+      class="form-control"
+      rows="3"
+    ></textarea>
+
+    <!-- Hora -->
+    <label class="form-label mt-3">Hora carga</label>
+    <input
+      id="inputHoraCarga"
+      class="form-control"
+      readonly
+    >
+
+    <!-- Guardar -->
+    <button
+      id="btnGuardarEvidencia"
+      class="btn btn-success w-100 mt-3"
+    >
+      Guardar evidencias
+    </button>
+
+  </div>
+
+  <div id="alertPlaceholder"></div>
+</div>
+
+<!-- TU JS -->
+<script src="../JS/evidencias_transportista.js"></script>
+
+</body>
+</html>

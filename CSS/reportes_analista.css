@@ -1,0 +1,73 @@
+/* Estética coherente con tu proyecto */
+body {
+  background-color: #000;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+.container {
+  max-width: 1100px; /* Analista merece más ancho */
+  padding-bottom: 40px;
+}
+
+/* Card + tabla */
+.card {
+  background-color: #e5e5e5;
+  border-radius: 16px;
+  border: none;
+  color: black;
+}
+
+h2 {
+  color: white;
+  font-weight: 700;
+}
+
+/* Table styling */
+table {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+table thead th {
+  background: #1a1f4c;
+  color: white;
+  font-weight: 600;
+  vertical-align: middle;
+  padding: 12px;
+}
+
+table tbody td {
+  padding: 10px 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  color: #222;
+}
+
+/* Foto thumbnails */
+.thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  cursor: pointer;
+}
+
+/* Botones */
+.btn {
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 12px;
+}
+
+.btn:hover {
+  background-color: #444;
+}
+
+/* pagination */
+.pagination .page-link {
+  color: #1a1f4c;
+}

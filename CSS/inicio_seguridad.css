@@ -1,0 +1,65 @@
+body {
+    background-color: #000000;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+}
+
+/* Contenedor */
+.container {
+    max-width: 430px;
+    min-height: 100vh;
+    background-color: #000;
+    padding-bottom: 40px;
+}
+
+/* Logo */
+.logo {
+    margin-top: 20px;
+    width: 150px;
+}
+
+/* Título */
+.title {
+    font-weight: 700;
+    color: white;
+}
+
+/* Tarjeta personalizada */
+.custom-card {
+    background-color: #e5e5e5;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: left;
+    width: 100%;
+}
+
+/* Título dentro de tarjeta */
+.custom-card h3 {
+    color: black;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Texto dentro de tarjeta */
+.custom-card p {
+    color: #2b2b2b;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+/* Botón */
+.btn-ir {
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 35px;
+    font-size: 14px;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-ir:hover {
+    background-color: #444;
+}

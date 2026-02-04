@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analistas CEDIS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../CSS/inicio_analista.css">
+</head>
+<body>
+
+    <div class="container text-center mt-4">
+
+    <!-- LOGO -->
+    <img src="../Logos/VENTO.png" alt="Logo Vento" class="img-fluid mb-3" style="max-width: 150px;">
+
+    <h2 class="fw-bold mb-4">ANALISTA</h2>
+
+    <!-- SECCIÓN 1 -->
+    <div class="card shadow mb-4 p-3">
+        <h3 class="h5 fw-bold">EVIDENCIAS</h3>
+        <p>Visualizar evidencias.</p>
+
+        <button onclick="window.location.href='registros_transportista.html'" 
+                class="btn btn-primary mt-2">
+            IR
+        </button>
+    </div>
+
+   
+
+</div>
+
+<script>
+const sesion = JSON.parse(localStorage.getItem("sesion"));
+
+if (!sesion || !sesion.logueado || sesion.rol !== "ANALISTA") {
+    window.location.href = "../Analista/login_analista.html";
+}
+</script>
+
+</body>
+</html>

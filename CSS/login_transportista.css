@@ -1,0 +1,106 @@
+/* === Fondo general === */
+body {
+    margin: 0;
+    padding: 0;
+    background: #0d1013;   /* Fondo negro con ligero tono gris */
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* === Contenedor principal === */
+.login-container {
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+}
+
+/* === Logo VENTO === */
+.vento-logo {
+    width: 65%;
+    margin-bottom: 25px;
+}
+
+/* === Texto del rol === */
+.titulo-rol {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* === Tarjeta del formulario === */
+.login-card {
+    background: #1b1b1b;
+    border-radius: 18px;
+    padding: 40px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* === Ícono grande de usuario === */
+.icon-user {
+    width: 95px;
+    margin-bottom: 25px;
+}
+
+/* === Contenedor de inputs === */
+.input-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border-bottom: 2px solid #aaaaaa;
+    margin-bottom: 22px;
+    padding: 4px 0;
+}
+
+/* Ícono dentro del input */
+.input-icon {
+    width: 22px;
+    margin-right: 10px;
+    opacity: 0.95;
+}
+
+/* === Inputs === */
+.login-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 15px;
+    padding: 5px 0;
+    box-shadow: none !important;
+}
+
+.login-input::placeholder {
+    color: #bfbfbf;
+    font-weight: 300;
+}
+
+.login-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* === Botón === */
+.login-btn {
+    width: 70%;
+    background: #3a3a3a;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 18px;
+    padding: 8px 0;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.login-btn:hover {
+    background: #4a4a4a;
+}
