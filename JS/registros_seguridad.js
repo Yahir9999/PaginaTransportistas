@@ -200,25 +200,44 @@ function iniciarQrSalida() {
     // =======================================================
     // CONFIRMAR SALIDA FINAL
     // =======================================================
-    document.getElementById("btnConfirmarSalida").addEventListener("click", () => { 
+document.getElementById("btnConfirmarSalida").addEventListener("click", async () => {
 
-        if (!salidaConfirmada) {
-            alert("Debe escanear el QR para confirmar salida.");
-            return;
-        }
+    if (!salidaConfirmada) {
+        alert("Debe escanear el QR para confirmar salida.");
+        return;
+    }
 
-        fetch(URL_BACKEND, {
+    // Deshabilitar botón para evitar doble clic
+    const btn = document.getElementById("btnConfirmarSalida");
+    btn.disabled = true;
+
+    try {
+        const response = await fetch(URL_BACKEND, {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 action: "registrarSalidaCEDI",
                 data: datosTransportista
             })
         });
 
+        if (!response.ok) {
+            throw new Error("Error al registrar salida");
+        }
+
+        // 👇 AQUÍ ya terminó todo correctamente
         alert("Salida del CEDI registrada correctamente.");
 
         limpiarPantalla();
-    });
+
+    } catch (error) {
+
+        alert("Error al registrar la salida. Intente nuevamente.");
+        btn.disabled = false;
+
+    }
+});
+
 
 });
 
