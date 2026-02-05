@@ -213,40 +213,34 @@ function iniciarQrSalida() {
     // =======================================================
 document.getElementById("btnConfirmarSalida").addEventListener("click", async () => {
 
-    if (enviandoSalida) return; 
-    enviandoSalida = true;
-
     if (!salidaConfirmada) {
         alert("Debe escanear el QR para confirmar salida.");
-        enviandoSalida = false;
         return;
     }
+
 
     const btn = document.getElementById("btnConfirmarSalida");
     btn.disabled = true;
 
     try {
-        const response = await fetch(URL_BACKEND, {
-            method: "POST",
-            body: JSON.stringify({
-                action: "registrarSalidaCEDI",
-                data: datosTransportista
-            })
-        });
+    await fetch(URL_BACKEND, {
+        method: "POST",
+        body: JSON.stringify({
+            action: "registrarSalidaCEDI",
+            data: datosTransportista
+        })
+    });
 
-        if (!response.ok) throw new Error("Error backend");
+    // NO validamos response.ok
+    alert("Salida del CEDI registrada correctamente.");
+    limpiarPantalla();
 
-        alert("Salida del CEDI registrada correctamente.");
-        limpiarPantalla();
+} catch (error) {
+    console.error(error);
+    alert("Error al registrar la salida.");
+    btn.disabled = false;
+}
 
-    } catch (error) {
-        console.error(error);
-        alert("Error al registrar la salida.");
-        btn.disabled = false;
-
-    } finally {
-        enviandoSalida = false; // libera solo al final
-    }
 });
 
 
