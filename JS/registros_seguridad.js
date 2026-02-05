@@ -242,7 +242,7 @@ document.getElementById("btnConfirmarSalida").addEventListener("click", async ()
         console.error(error);
         alert("Error al registrar la salida.");
         btn.disabled = false;
-        
+
     }
 });
 
