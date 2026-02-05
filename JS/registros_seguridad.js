@@ -223,27 +223,29 @@ document.getElementById("btnConfirmarSalida").addEventListener("click", async ()
     btn.disabled = true;
 
     try {
-        await fetch(URL_BACKEND, {
+        const response = await fetch(URL_BACKEND, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+
             body: JSON.stringify({
                 action: "registrarSalidaCEDI",
                 data: datosTransportista
             })
         });
 
-
+        if (!response.ok) throw new Error("Error backend");
 
         alert("Salida del CEDI registrada correctamente.");
 
         limpiarPantalla();
 
-    } catch {
+    } catch (error) {
+        console.error(error);
         alert("Error al registrar la salida.");
         btn.disabled = false;
-
+        
     }
 });
+
 
 
 
