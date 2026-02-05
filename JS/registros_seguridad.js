@@ -155,6 +155,10 @@ function iniciarQrSalida() {
 
     if (qrSalida) return;
 
+    // 👇 Asegurar que el contenedor sea visible al iniciar
+    const contenedorQr = document.getElementById("qr-reader-salida");
+    contenedorQr.style.display = "block";
+
     qrSalida = new Html5Qrcode("qr-reader-salida");
 
     qrSalida.start(
@@ -172,25 +176,35 @@ function iniciarQrSalida() {
                     return;
                 }
 
+                // ✅ Confirmación correcta
                 salidaConfirmada = true;
                 document.getElementById("btnConfirmarSalida").disabled = false;
 
-                // DETENER Y LIMPIAR COMPLETAMENTE
+                // 🛑 DETENER Y LIMPIAR COMPLETAMENTE EL LECTOR
                 await qrSalida.stop();
                 await qrSalida.clear();
                 qrSalida = null;
+
+                // 👇 CLAVE: ocultar lector para liberar la pantalla (Safari iOS)
+                contenedorQr.style.display = "none";
 
                 alert("QR validado. Confirme salida.");
 
             } catch (e) {
-                await qrSalida.stop();
-                await qrSalida.clear();
-                qrSalida = null;
+
+                if (qrSalida) {
+                    await qrSalida.stop();
+                    await qrSalida.clear();
+                    qrSalida = null;
+                }
+
+                contenedorQr.style.display = "none";
                 alert("QR inválido");
             }
         }
     );
 }
+
 
 
 

@@ -51,3 +51,14 @@ h2 {
     border-radius: 15px;
     overflow: hidden;
 }
+
+#qr-reader video,
+#qr-reader-salida video {
+    pointer-events: none !important;
+}
+
+#qr-reader,
+#qr-reader-salida {
+    pointer-events: none;
+}
+
