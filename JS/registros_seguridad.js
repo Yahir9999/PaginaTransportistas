@@ -234,7 +234,7 @@ document.getElementById("btnConfirmarSalida").addEventListener("click", async ()
             })
         });
 
-       
+        if (!response.ok) throw new Error("Error backend");
 
         alert("Salida del CEDI registrada correctamente.");
         limpiarPantalla();
