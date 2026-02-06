@@ -1,4 +1,4 @@
-const URL_BACKEND = "";
+const URL_BACKEND = "https://script.google.com/macros/s/AKfycbw1cHd63Ss3iaYO3P-JG92mvS2meDx9F7pcF_WrBHg4LoYicxPJfXuUmlFEP8EeJPS8/exec";
 
 let datosTransportista = {};
 let salidaConfirmada = false;
