@@ -5,6 +5,8 @@ let salidaConfirmada = false;
 let qrSalida = null;
 let html5QrCode = null;
 let toRegistradas = false;
+let enviandoSalida = false;
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -279,10 +281,13 @@ function limpiarPantalla() {
 
     if (html5QrCode) html5QrCode.stop().catch(() => {});
     if (qrSalida) {
-    qrSalida.stop().catch(() => {});
-    qrSalida.clear().catch(() => {});
+    try {
+        qrSalida.stop();
+        qrSalida.clear();
+    } catch {}
     qrSalida = null;
 }
+
 
 
     mostrarMensajeListo();
